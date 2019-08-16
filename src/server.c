@@ -1,22 +1,57 @@
+
+
 #include <signal.h>
+#include <stdlib.h>
+
 #include "open62541.h" 
-//The library includes several basic types used in the OPC-UA standard. When possible it is best to use these types.
-UA_Boolean running = true; 
-//Handler that allows to stop server running when doing a ctrl-c in the command line
-static void stopHandler(int sig) {
-	UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received ctrl-c");
-	running = false;
+
+
+static void dataChangeNotificationCallback( UA_Server *server, 
+                                            UA_UInt32 monitoredItemId, 
+                                            void *monitoredItemContext, 
+                                            const UA_NodeId *nodeId,
+                                            void *nodeContext, 
+                                            UA_UInt32 attributeId,
+                                            const UA_DataValue *value) 
+{
+    
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Received Notification");
+    
 }
-int main(void) { 
-	signal(SIGINT, stopHandler);
-	signal(SIGTERM, stopHandler); 
-	//Create a new server with default configuration
-	UA_ServerConfig *config = UA_ServerConfig_new_default();
-	UA_Server *server = UA_Server_new(config); 
-	//This line runs the server in a loop while the running variable is true. It's important that initializations and other things done in our code are before this function call.
-	UA_StatusCode retval = UA_Server_run(server, &running); 
-	//When the server stops running we free the resources
-	UA_Server_delete(server);
-	UA_ServerConfig_delete(config);
-	return (int)retval;
+
+
+static void addMonitoredItemToCurrentTimeVariable(UA_Server *server) 
+{
+    UA_NodeId currentTimeNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER_SERVERSTATUS_CURRENTTIME);
+    
+    UA_MonitoredItemCreateRequest monRequest = UA_MonitoredItemCreateRequest_default(currentTimeNodeId);
+    monRequest.requestedParameters.samplingInterval = 100.0; /* 100 ms interval */
+    
+    UA_Server_createDataChangeMonitoredItem(server, UA_TIMESTAMPSTORETURN_SOURCE, monRequest, NULL, dataChangeNotificationCallback);
+}
+
+
+
+static volatile UA_Boolean running = true;
+static void stopHandler(int sign) 
+{
+    UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "received ctrl-c");
+    running = false;
+}
+
+
+int main(void) 
+{    
+    signal(SIGINT, stopHandler);
+    signal(SIGTERM, stopHandler);
+
+    UA_Server *server = UA_Server_new();
+    UA_ServerConfig_setDefault(UA_Server_getConfig(server));
+
+    addMonitoredItemToCurrentTimeVariable(server);
+
+    UA_StatusCode retval = UA_Server_run(server, &running);
+    UA_Server_delete(server);
+
+    return retval == UA_STATUSCODE_GOOD ? EXIT_SUCCESS : EXIT_FAILURE;
 }
