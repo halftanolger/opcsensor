@@ -1,14 +1,8 @@
 
-
 #include <idc_tanktabell_util.h>
 
 
 extern double idc_tanktabell_data[][2];
-
-void idc_tanktabell_util_create(const char* filename) {
-
-  return;
-}
 
 
 int idc_tanktabell_util_size(void) {

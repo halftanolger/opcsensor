@@ -21,8 +21,6 @@
 extern "C" {
 #endif
 
-void idc_tanktabell_util_create(const char* filename);
-
 int idc_tanktabell_util_size(void);
 
 double idc_tanktabell_util_look_up(double index);

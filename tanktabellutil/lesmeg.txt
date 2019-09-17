@@ -4,4 +4,24 @@
 
 +-----------------------------------------------------------------------------+
 
-todo: ..
+Opprett ei csv-fil av aktuelle data, ved hjelp av Excel.
+(Excel har mye fancy stuff mht å opprette csv-data fra 'vanlig' tekst-data.)
+
+Nå har du ei fil kalt data.csv
+
+Bruk util.exe for å lage ei c-fil:
+
+util -cf data.csv > idc_tanktabell_util_data.c
+
+Nå har du fått flyttet data fra 'regnearket' over til en to dimmensjonal
+c-tabell. Denne kan linkes inn i biblioteket, som igjen kan linkes inn i
+pls-kode, i lag med en enkel funksjon som henter ut data fra tabellen, ref.
+main.c for mer info.
+
+Demo:
+
+$ ./util.exe  -d 16
+IDC Tanktabell util ver. 10001
+lookup 16.000000 => 606.000000
+
+-theEnd-

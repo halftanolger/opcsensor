@@ -1,4 +1,8 @@
 
+#
+# Dette er bare et eksempel på hvordan man kan sette sammen
+# idc_tanktabell_util_data.c og idc_tanktabell_util.c til 'et-eller-annet'.
+#
 
 all: util
 
