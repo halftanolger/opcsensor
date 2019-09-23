@@ -1,6 +1,6 @@
 # opcsensor
 
-Hensikten med opcsensor er å se litt på OPC UA og proprietær kode.
+Hensikten med opcsensor er å se litt på OPC UA
 
 ## Kokebok mht det å bygge Open62541 for Windows
 
