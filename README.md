@@ -1,14 +1,13 @@
 # opcsensor
 
-Hensikten med opcsensor er å se litt på OPC UA og proprietær kode,
-i.e. kode som man lager selv :-)
+Hensikten med opcsensor er å se litt på OPC UA og proprietær kode.
 
 
 git clone https://github.com/halftanolger/opcsensor.git
 cd opcsensor
 
 
-# Kokebok mht det å bygge Open62541 for Windows
+## Kokebok mht det å bygge Open62541 for Windows
 
 
 * Last ned Qt open source for Windows, MinGW 7.3.0 32-bit
@@ -29,7 +28,7 @@ cd opcsensor
 
 
 
-# Kokebok mht å bygge opcsensor for Windows
+## Kokebok mht å bygge opcsensor for Windows
 
 
     > mkdir build
@@ -43,7 +42,7 @@ cd opcsensor
     Nå har du også et tipp-topp utviklingsmiljø for å teste ut de andre tutorial-eksemplene du
     finner på open62541.org -siden.
 
-# Mer info    
+## Mer info    
 
 https://open62541.org/doc/current/toc.html#  
 https://medium.com/gradiant-talks/implementing-an-opc-ua-server-using-open62541-77aeddd99370
