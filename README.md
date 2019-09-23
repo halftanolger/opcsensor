@@ -13,23 +13,23 @@ Hensikten med opcsensor er å se litt på OPC UA
 
 * Bygg open6241 open62541 (MinGW 7.3.0.32-bit bulid) for windows, som følger:
 
-'''
+```
      mkdir build
      cd build
      cmake .. -G"MinGW Makefiles" -DUA_ENABLE_AMALGAMATION=ON -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Debug -DUA_ENABLE_DISCOVERY=ON -DUA_ENABLE_METHODCALLS=ON -DUA_ENABLE_NODEMANAGEMENT=ON -DUA_ENABLE_SUBSCRIPTIONS=ON -DUA_LOGLEVEL=300
      mingw32-make
-'''
+```
 
 Ut fra dette får vi to filer; open62541.c og open62541.h Disse representerer vårt open62541-bibliotek.
 
 
 ## Kokebok mht å bygge opcsensor for Windows
 
-'''
+```
 mkdir build
 cd build
 gcc -std=c99 -I../lib/open62541 ../lib/open62541/open62541.c -lws2_32  ../src/server.c -o server
-'''
+```
 
 
 Nå har du ei kjørbar fil kalt 'server.exe' som representerer OPC -serveren vår.
