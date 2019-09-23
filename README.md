@@ -2,13 +2,7 @@
 
 Hensikten med opcsensor er å se litt på OPC UA og proprietær kode.
 
-
-git clone https://github.com/halftanolger/opcsensor.git
-cd opcsensor
-
-
 ## Kokebok mht det å bygge Open62541 for Windows
-
 
 * Last ned Qt open source for Windows, MinGW 7.3.0 32-bit
   (Da får man også et fiks-ferdig-byggemiljø for MinGW)
@@ -24,23 +18,22 @@ cd opcsensor
     > cmake .. -G"MinGW Makefiles" -DUA_ENABLE_AMALGAMATION=ON -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Debug -DUA_ENABLE_DISCOVERY=ON -DUA_ENABLE_METHODCALLS=ON -DUA_ENABLE_NODEMANAGEMENT=ON -DUA_ENABLE_SUBSCRIPTIONS=ON -DUA_LOGLEVEL=300
     > mingw32-make
 
-    -> ut fra dette får vi to filer, som representerer vårt open62541-bibliotek: open62541.c og open62541.h
-
+    Ut fra dette får vi to filer. Disse representerer vårt open62541-bibliotek: open62541.c og open62541.h
 
 
 ## Kokebok mht å bygge opcsensor for Windows
-
 
     > mkdir build
     > cd build
     > gcc -std=c99 -I../lib/open62541 ../lib/open62541/open62541.c  -lws2_32  ../src/server.c -o server
 
-    Nå har du ei kjørbar fil kalt 'server.exe' som representerer OPC -serveren vår :-)
+    Nå har du ei kjørbar fil kalt 'server.exe' som representerer OPC -serveren vår.
 
     Sjekk data fra serven vha f.eks UaExpert sin OPC UA klient (https://www.unified-automation.com/)
 
     Nå har du også et tipp-topp utviklingsmiljø for å teste ut de andre tutorial-eksemplene du
     finner på open62541.org -siden.
+
 
 ## Mer info    
 
